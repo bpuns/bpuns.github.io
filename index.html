@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
 </head>
+
 <body>
-  <h1>Bpuns Hello World!!</h1>
+
+  <button>
+    给flutter发送消息{a: '1',b: '2',c: '3'}
+  </button>
+
+  <script>
+    const vConsole = new VConsole()
+
+    window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
+
+      document.querySelector('button').onclick = function () {
+        window.flutter_inappwebview.callHandler('JsToFlutter', {
+          a: '1',
+          b: '2',
+          c: '3'
+        })
+      }
+
+      window.flutter_inappwebview.callHandler('FlutterToJS').then(function (...args) {
+        console.log('接收到FlutterToJS的值：', args)
+      })
+
+    });
+
+    // FlutterInAppWebViewWebMessageListener('FlutterToJS')
+
+    // console.log(Object.keys(window))
+
+    // const actions = {
+    //   ChangeZoom: '隐藏APP导航头',
+    //   ResetZoom: '显示导航头',
+    //   bpm_back: '网页导航回退',
+    //   ChangeScreenOrientation: '横屏',
+    //   ResetScreenOrientation: '竖屏',
+    //   gotoTab: '页面详情返回门户或列表',
+    //   GetSign: '获取Acticket'
+    // }
+
+    // Object.keys(actions).forEach(key => {
+    //   const btn = document.createElement('button')
+    //   btn.innerText = actions[key]
+    //   btn.addEventListener('click', () => {
+    //     console.log(window.ReactNativeWebView)
+    //     if (window.ReactNativeWebView) {
+    //       window.ReactNativeWebView.postMessage(key)
+    //     }
+    //   })
+    //   document.body.appendChild(btn)
+    // })
+
+  </script>
 </body>
+
 </html>
